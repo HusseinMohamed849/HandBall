@@ -58,23 +58,20 @@ router.delete('/player/delete', async(req, res)=>{
 })
 
 //Update player
-// router.patch('/player/me', auth, async(req, res)=>{
-//     try{
-//         const update = Object.keys(req.body)
-//         const allowupdate =['name', 'email', 'phoneNumber','password','birthdate']
-//         const isValidOperation = update.every((update)=>allowupdate.includes(update))
+router.patch('/player/me', auth , async(req, res)=>{
+        const update = Object.keys(req.body)
+        const allowupdate =['name', 'email', 'phoneNumber','password','birthdate']
+        const isValidOperation = update.every((update)=>allowupdate.includes(update))
     
-//         if(!isValidOperation)
-//             return res.status(400).send({error:'Invalid update'})
-//         try{
-//             // const user = await User.findByIdAndUpdate(req.params.id)
-            
-//             update.forEach((update) => req.player[update] = req.body[update])
-//             await req.player.save()
-//             res.send(req.player)
-            
-//     } catch (e) {
-//         res.status(500).send(e)
-//     }
-// })
+        if(!isValidOperation)
+            return res.status(400).send({error:'Invalid update'})
+            try{
+            update.forEach((update) => req.player[update] = req.body[update])
+            await req.player.save()
+            res.send(req.player) 
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
 module.exports = router

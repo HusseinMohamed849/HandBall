@@ -39,7 +39,14 @@ const playerSchema = new mongoose.Schema({
         }
     },gender:{
         type:String,
-        require: true,
+        required: true,
+    },rate:{
+        type: Number,
+        default: 0,
+        required:true
+    }, attend:{
+        type:Boolean,
+        required: true
     },avatar:{
         type:String,
         default:null,
