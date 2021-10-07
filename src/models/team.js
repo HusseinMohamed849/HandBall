@@ -14,6 +14,10 @@ const teamSchema = new mongoose.Schema({
     }, rate:{
         type:Number,
         default:0
+    }, trainer:{
+        type:String,
+        required: true,
+        ref:"Trainer",
     }
 })
 

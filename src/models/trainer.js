@@ -19,8 +19,20 @@ const trainerSchema = new mongoose.Schema({
         required: true
     },  attend:{
         type:String,
-        default:1
+        default:0
+    }, address:{
+        type:String,
+        required: true
+    }, phoneNumber:{
+        type:Number,
+        required: true,
+        unique:true
     }
+})
+trainerSchema.virtual('team',{
+    ref:'Team',
+    localField:'name',
+    foreignField:'trainer'
 })
 
 const Trainer = mongoose.model("Trainer",trainerSchema)
