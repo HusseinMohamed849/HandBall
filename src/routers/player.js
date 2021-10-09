@@ -9,6 +9,8 @@ router.post('/player', async(req,res)=>{
     try{
         await player.save()
         const token = await player.generateAuthtoken()
+        // const team =  new Team({name:req.body.name})
+        // await team.save()
         res.status(201).send({player, token})
     } catch (e) {
         console.log("error")

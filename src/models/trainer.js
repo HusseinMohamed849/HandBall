@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 const trainerSchema = new mongoose.Schema({
     name : {
@@ -18,22 +19,31 @@ const trainerSchema = new mongoose.Schema({
         type:Number,
         required: true
     },  attend:{
-        type:String,
+        type:Boolean,
         default:0
     }, address:{
         type:String,
         required: true
     }, phoneNumber:{
-        type:Number,
-        required: true,
-        unique:true
+        type: String,
+        unique: true,
+        minLength:11,
+        maxLength:11,
+        validate(value){
+            if(!validator.isInt(value))
+                throw new Error('phone number is only number')
+        }, validate(value){
+            if(!validator.isMobilePhone(value,'ar-EG'))
+                throw new Error('check your phone number')
+        }
     }
 })
-trainerSchema.virtual('team',{
-    ref:'Team',
-    localField:'name',
-    foreignField:'trainer'
-})
+
+// trainerSchema.virtual('teams',{
+//     ref:'Team',
+//     localField:'name',
+//     foreignField:'Coach'
+// })
 
 const Trainer = mongoose.model("Trainer",trainerSchema)
 module.exports = Trainer

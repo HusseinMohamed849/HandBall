@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Team = require('../models/team')
+const Player = require('../models/player')
 const auth = require('../middleware/auth')
 
 //Create team
@@ -14,7 +15,6 @@ router.post('/team', async(req, res)=>{
     }
 })
 
-
 //read all team
 router.get('/team', async(req, res)=>{
     try{
@@ -24,6 +24,9 @@ router.get('/team', async(req, res)=>{
         res.status(400).send(e)
     }
 })
+
+//
+
 
 //Search for team
 router.post('/team/search', async(req, res)=>{
@@ -38,7 +41,7 @@ router.post('/team/search', async(req, res)=>{
 //delete team 
 router.delete('/team/delete', async(req, res)=>{
     try{
-        const team = await Team.findOneAndDelete({name:req.body.name})
+        const team = await Team.findOneAndDelete({id:req.body._id})
         if(!team)
             res.status(500).send("Check this Team name")
         else {
