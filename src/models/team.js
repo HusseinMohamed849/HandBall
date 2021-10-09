@@ -17,7 +17,7 @@ const teamSchema = new mongoose.Schema({
     }, Coach:{
         type:String,
         required: true,
-    }, players_id:{
+    }, player_id:{
         type:String,
         ref:"Player"
     }, skill_Performance :{
@@ -32,9 +32,9 @@ const teamSchema = new mongoose.Schema({
 })
 
 // teamSchema.virtual('players',{
-//     ref:'Players',
-//     localField:'name',
-//     foreignField:'teamName'
+//     ref:'Player',
+//     localField:'player_id',
+//     foreignField:'team_id'
 // })
 
 const Team = mongoose.model("Team",teamSchema)

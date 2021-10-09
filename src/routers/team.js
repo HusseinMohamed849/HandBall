@@ -31,8 +31,12 @@ router.get('/team', async(req, res)=>{
 //Search for team
 router.post('/team/search', async(req, res)=>{
     try{
-        const team = await Team.findOne({name:req.body.name})
-        res.status(200).send(team)
+        const team = await Team.findOne({_id:req.body.id})
+        if(!team){
+            res.status(400).send("Uncorrect id")
+        }
+        else 
+            res.status(200).send(team)
     } catch (e) {
         res.status(500).send(e)
     }

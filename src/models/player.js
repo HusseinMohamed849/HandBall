@@ -66,18 +66,6 @@ const playerSchema = new mongoose.Schema({
             if(!validator.isMobilePhone(value,'ar-EG'))
                 throw new Error('check your phone number')
         }
-    }, parentPhone:{
-            type: String,
-            unique: true,
-            minLength:11,
-            maxLength:11,
-            validate(value){
-                if(!validator.isInt(value))
-                    throw new Error('phone number is only number')
-            }, validate(value){
-                if(!validator.isMobilePhone(value,'ar-EG'))
-                    throw new Error('check your phone number')
-            }
     },gender:{
         type:String,
         required: true,
@@ -118,11 +106,11 @@ const playerSchema = new mongoose.Schema({
     timestamps:true
 })
 
-playerSchema.virtual('teams',{
-        ref:'Team',
-        localField:'_id',
-        foreignField:'players'
-    })
+// playerSchema.virtual('teams',{
+//         ref:'Team',
+//         localField:'_id',
+//         foreignField:'players'
+//     })
 
 
 //to create auth token

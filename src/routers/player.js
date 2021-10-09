@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Player = require('../models/player')
+const Team = require('../models/player')
 const auth = require('../middleware/auth')
 
 //create new player
