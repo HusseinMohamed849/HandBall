@@ -8,5 +8,11 @@ attend palyer_id lw m4 mogod msgl4
 l attend w l a4trkat w l rate
 show players in team and trainer in team 
 
+add potho in posts
+postman auth (token)
 
+add question from player and replay from trainer
 
+to type of player (team, accadimatic)
+
+l file

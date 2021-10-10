@@ -88,10 +88,8 @@ const playerSchema = new mongoose.Schema({
     }, overall_Performance:{
         type:Number
     }, team_id:{
-        type:String,
-        required:true
-    }
-    , avatar:{
+        type:String
+    }, avatar:{
         type:String,
         default:null,
     },tokens:[{
@@ -106,12 +104,18 @@ const playerSchema = new mongoose.Schema({
     timestamps:true
 })
 
-// playerSchema.virtual('teams',{
-//         ref:'Team',
-//         localField:'_id',
-//         foreignField:'players'
-//     })
 
+// playerSchema.virtual('teams',{
+//     ref:'Team',
+//     localField:'_id',
+//     foreignField:'player_id'
+// })
+
+playerSchema.virtual('posts',{
+    ref:'Post',
+    localField:'_id',
+    foreignField:'owner'
+})
 
 //to create auth token
 playerSchema.methods.generateAuthtoken = async function () {
@@ -122,6 +126,7 @@ playerSchema.methods.generateAuthtoken = async function () {
     await  player.save()
     return token
 }
+
 // login check
 playerSchema.statics.findByCredentials = async (email, password) =>{
     const player = await Player.findOne({email})

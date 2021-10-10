@@ -5,7 +5,7 @@ const Player = require('../models/player')
 const auth = require('../middleware/auth')
 
 //Create team
-router.post('/team', async(req, res)=>{
+router.post('/team' , async(req, res)=>{
     const team = new Team(req.body)
     try{
         await team.save()
