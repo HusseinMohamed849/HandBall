@@ -1,15 +1,15 @@
 Update trainer 
 Update team
-Auth to unable anyone to delete any thing
+Update data of any player
+types of user(player, trainer, mangers(who create team and put rate))
+
+
 filter
 attend palyer_id lw m4 mogod msgl4
 
 
-l attend w l a4trkat w l rate
-show players in team and trainer in team 
-
 add potho in posts
-postman auth (token)
+postman auth (token) --> test
 
 add question from player and replay from trainer
 

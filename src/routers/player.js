@@ -3,9 +3,11 @@ const router = express.Router()
 const Player = require('../models/player')
 const Team = require('../models/player')
 const auth = require('../middleware/auth')
+const authManger = require('../middleware/authManger')
+
 
 //create new player
-router.post('/player', async(req,res)=>{
+router.post('/player', authManger,  async(req,res)=>{
     const player =  new Player(req.body)
     try{
         await player.save()
@@ -20,7 +22,7 @@ router.post('/player', async(req,res)=>{
 })
 
 //read all players
-router.get('/player', async(req, res)=>{
+router.get('/player',authManger, async(req, res)=>{
     try{
         const player = await Player.find({})
         res.status(200).send(player)
@@ -30,7 +32,7 @@ router.get('/player', async(req, res)=>{
 })
 
 //Search for player
-router.post('/player/one', async(req, res)=>{
+router.post('/player/one',authManger, async(req, res)=>{
     try{
         const player = await Player.findOne({email:req.body.email})
         res.status(200).send(player)
@@ -51,7 +53,7 @@ router.post('/player/login', async(req, res)=>{
 })
 
 //delete player 
-router.delete('/player/delete', async(req, res)=>{
+router.delete('/player/delete', authManger, async(req, res)=>{
     try{
         const player = await Player.findOneAndDelete({email:req.body.email})
         res.status(200).send(player)

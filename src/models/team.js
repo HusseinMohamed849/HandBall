@@ -20,6 +20,9 @@ const teamSchema = new mongoose.Schema({
     }, player_id:{
         type:String,
         ref:"Player"
+    }, trainer_id:{
+        type:String,
+        ref:"Trainer"
     }, skill_Performance :{
         type:Number,
     }, physical_Performance:{

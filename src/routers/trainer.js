@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const Trainer = require('../models/trainer')
+const authManger = require('../middleware/authManger')
 
 
 //create new trainer
-router.post('/trainer', async(req,res)=>{
+router.post('/trainer', authManger, async(req,res)=>{
     const trainer =  new Trainer(req.body)
     try{
         await trainer.save()
@@ -15,7 +16,7 @@ router.post('/trainer', async(req,res)=>{
 })
 
 //read all team
-router.get('/trainer', async(req, res)=>{
+router.get('/trainer', authManger, async(req, res)=>{
     try{
         const trainer = await Trainer.find({})
         res.status(200).send(trainer)
@@ -25,9 +26,9 @@ router.get('/trainer', async(req, res)=>{
 })
 
 //Search for team
-router.post('/trainer/search', async(req, res)=>{
+router.post('/trainer/search', authManger, async(req, res)=>{
     try{
-        const trainer = await Trainer.findOne({name:req.body.name})
+        const trainer = await Trainer.findOne({_id:req.body.id})
         if(!trainer)
             res.status(400).send("No trainer with this name")
         else 
@@ -38,7 +39,7 @@ router.post('/trainer/search', async(req, res)=>{
 })
 
 //delete team 
-router.delete('/trainer', async(req, res)=>{
+router.delete('/trainer', authManger, async(req, res)=>{
     try{
         const trainer = await Trainer.findOneAndDelete({name:req.body.name})
         if(!trainer)
@@ -51,10 +52,10 @@ router.delete('/trainer', async(req, res)=>{
     }
 })
 
-//Update trainer
-// router.patch('/trainer/_id' , async(req, res)=>{
+// //Update trainer
+// router.patch('/trainer/s' , async(req, res)=>{
 //     const update = Object.keys(req.body)
-//     const allowupdate =['name', 'age']
+//     const allowupdate =['name', 'rate','salary','attend', 'address','phoneNumber']
 //     const isValidOperation = update.every((update)=>allowupdate.includes(update))
 
 //     if(!isValidOperation)

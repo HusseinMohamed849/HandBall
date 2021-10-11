@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const Team = require('../models/team')
 const Player = require('../models/player')
-const auth = require('../middleware/auth')
+const authManger = require('../middleware/authManger')
 
 //Create team
-router.post('/team' , async(req, res)=>{
+router.post('/team' , authManger, async(req, res)=>{
     const team = new Team(req.body)
     try{
         await team.save()
@@ -43,7 +43,7 @@ router.post('/team/search', async(req, res)=>{
 })
 
 //delete team 
-router.delete('/team/delete', async(req, res)=>{
+router.delete('/team/delete', authManger, async(req, res)=>{
     try{
         const team = await Team.findOneAndDelete({id:req.body._id})
         if(!team)
