@@ -31,6 +31,24 @@ router.get('/player',authManger, async(req, res)=>{
     }
 })
 
+// GET /tasks?completed=true
+// router.get('/player/filter', async (req, res) => {
+//     const match = {}
+//     if (req.query.gender) {
+//         match.gender = req.query.gender === "female"
+//     try {
+//         await req.player.populate({
+//             match
+//         }).execPopulate()
+//         res.send(req.player)
+//         console.log("hee")
+//     } catch (e) {
+//         res.status(500).send(e)
+//         console.log('error')
+//     }
+// }
+// })
+
 //Search for player
 router.post('/player/one',authManger, async(req, res)=>{
     try{

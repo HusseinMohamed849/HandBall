@@ -53,19 +53,22 @@ router.delete('/trainer', authManger, async(req, res)=>{
 })
 
 // //Update trainer
-// router.patch('/trainer/s' , async(req, res)=>{
+// router.patch('/trainer/:id' , async(req, res)=>{
 //     const update = Object.keys(req.body)
 //     const allowupdate =['name', 'rate','salary','attend', 'address','phoneNumber']
 //     const isValidOperation = update.every((update)=>allowupdate.includes(update))
 
 //     if(!isValidOperation)
 //         return res.status(400).send({error:'Invalid update'})
-   
 //         try{
-//         update.forEach((update) => req.trainer[update] = req.body[update])
-//         await req.trainer.save()
-//         res.send(req.trainer) 
+//         const trainer = await Trainer.findOne({_id: req.params.id})
+//         if(!trainer)
+//             return res.status(404).send()
+//         updates.forEach((update) => trainer[update] = req.body[update])
+//         await trainer.save()
+//         res.send(trainer) 
 // } catch (e) {
+//     console.log('error')
 //     res.status(500).send(e)
 // }
 // })

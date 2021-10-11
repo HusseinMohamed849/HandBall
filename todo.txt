@@ -2,17 +2,10 @@ Update trainer
 Update team
 Update data of any player
 types of user(player, trainer, mangers(who create team and put rate))
-
-
 filter
-attend palyer_id lw m4 mogod msgl4
-
-
+relation been player and attend
 add potho in posts
 postman auth (token) --> test
-
 add question from player and replay from trainer
-
 to type of player (team, accadimatic)
-
 l file
