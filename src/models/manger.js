@@ -42,6 +42,7 @@ const mangerSchema = new mongoose.Schema({
     }]
 })
 
+//to create auth token
 mangerSchema.methods.generateAuthtoken = async function () {
     const manger = this
     const token = jwt.sign({ _id: manger._id.toString() },"thisismanger")
@@ -50,6 +51,18 @@ mangerSchema.methods.generateAuthtoken = async function () {
     await  manger.save()
     return token
 }
+
+//to login
+mangerSchema.statics.findByCredentials = async (email, password) =>{
+    const manger = await Manger.findOne({email})
+    if(!manger) {
+        throw new Error('Uncorrect email')
+    }
+    const ismatch = password === manger.password
+    if(!ismatch)
+        throw new Error('Uncorrect password')
+    return manger
+}  
 
 const Manger = mongoose.model("Manger",mangerSchema)
 module.exports = Manger

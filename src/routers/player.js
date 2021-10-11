@@ -31,7 +31,7 @@ router.get('/player',authManger, async(req, res)=>{
     }
 })
 
-// GET /tasks?completed=true
+// filter
 // router.get('/player/filter', async (req, res) => {
 //     const match = {}
 //     if (req.query.gender) {
@@ -80,18 +80,21 @@ router.delete('/player/delete', authManger, async(req, res)=>{
     }
 })
 
-//Update player
-router.patch('/player/me', auth , async(req, res)=>{
-        const update = Object.keys(req.body)
-        const allowupdate =['name', 'email', 'phoneNumber','password','birthdate']
-        const isValidOperation = update.every((update)=>allowupdate.includes(update))
-    
-        if(!isValidOperation)
-            return res.status(400).send({error:'Invalid update'})
-            try{
-            update.forEach((update) => req.player[update] = req.body[update])
-            await req.player.save()
-            res.send(req.player) 
+//Update player from manger
+router.patch('/player', authManger, async(req, res)=>{
+    try{
+        const player = await Player.findOneAndUpdate({_id:req.body.id},{...req.body})
+        res.status(200).send(player)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
+//Update plyer
+router.patch('/player/me', auth, async(req, res)=>{
+    try{
+        const player = await Player.findOneAndUpdate({...req.body})
+        res.status(200).send(player)
     } catch (e) {
         res.status(500).send(e)
     }

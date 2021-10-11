@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Trainer = require('../models/trainer')
 const authManger = require('../middleware/authManger')
+const authTrainer = require('../middleware/authTrainer')
+
 
 
 //create new trainer
@@ -9,7 +11,8 @@ router.post('/trainer', authManger, async(req,res)=>{
     const trainer =  new Trainer(req.body)
     try{
         await trainer.save()
-        res.status(201).send(trainer)
+        const token = await trainer.generateAuthtoken()
+        res.status(201).send({trainer, token})
     } catch (e) {
         res.status(500).send(e)
     }
@@ -52,25 +55,35 @@ router.delete('/trainer', authManger, async(req, res)=>{
     }
 })
 
-// //Update trainer
-// router.patch('/trainer/:id' , async(req, res)=>{
-//     const update = Object.keys(req.body)
-//     const allowupdate =['name', 'rate','salary','attend', 'address','phoneNumber']
-//     const isValidOperation = update.every((update)=>allowupdate.includes(update))
+//update form manger to any trainer
+router.patch('/trainer', authManger, async(req, res)=>{
+    try{
+        const trainer = await Trainer.findOneAndUpdate({_id:req.body.id},{...req.body})
+        res.status(200).send(trainer)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
 
-//     if(!isValidOperation)
-//         return res.status(400).send({error:'Invalid update'})
-//         try{
-//         const trainer = await Trainer.findOne({_id: req.params.id})
-//         if(!trainer)
-//             return res.status(404).send()
-//         updates.forEach((update) => trainer[update] = req.body[update])
-//         await trainer.save()
-//         res.send(trainer) 
-// } catch (e) {
-//     console.log('error')
-//     res.status(500).send(e)
-// }
-// })
+//update 
+router.patch('/trainer/me', authTrainer ,  async(req, res)=>{
+    try{
+        const trainer = await Trainer.findOneAndUpdate({...req.body})
+        res.status(200).send(trainer)
+    } catch(e) {
+        res.status(500).send(e)
+    }   
+})
+
+router.post('/trainer/login', async(req, res)=>{
+    try{
+        const trainer = await Trainer.findByCredentials(req.body.email, req.body.password)
+        const token = await trainer.generateAuthtoken()
+        res.send({trainer, token})
+    } catch (e) {
+        res.status(500).send("Uncorrect Data")
+    }
+})
+
 
 module.exports = router;

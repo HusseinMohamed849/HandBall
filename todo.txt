@@ -1,11 +1,10 @@
-Update trainer 
-Update team
-Update data of any player
-types of user(player, trainer, mangers(who create team and put rate))
-filter
-relation been player and attend
-add potho in posts
 postman auth (token) --> test
+filter
+
+add potho in posts
 add question from player and replay from trainer
 to type of player (team, accadimatic)
+to tabel (playerteam, playeraccadimatic)
+
 l file
+

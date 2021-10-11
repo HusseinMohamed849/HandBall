@@ -31,5 +31,15 @@ router.get('/manger/search', async(req, res)=>{
     }
 })
 
+//login
+router.post('/manger/login', async(req, res)=>{
+    try{
+        const manger = await Manger.findByCredentials(req.body.email, req.body.password)
+        const token = await manger.generateAuthtoken()
+        res.send({manger, token})
+    } catch (e) {
+        res.status(500).send("Uncorrect Data")
+    }
+})
 
 module.exports = router

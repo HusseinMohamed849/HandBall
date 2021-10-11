@@ -18,6 +18,8 @@ const Supscrip = require('./models/subscription');
 const subscriprouter = require('./routers/subscription')
 const bodyParser = require("body-parser");
 const auth = require('./middleware/auth')
+const authManger = require('./middleware/authManger')
+const authTrainer = require('./middleware/authTrainer')
 const validator = require('validator')
 require('./db/mongoose')
 const app = require('express')();

@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const Attend = require('../models/attend')
+const authManger = require('../middleware/authManger')
 
-router.post('/attend', async(req, res)=>{
+router.post('/attend', authManger, async(req, res)=>{
     const attend = new Attend(req.body)
     try{
         await attend.save()
@@ -12,7 +13,7 @@ router.post('/attend', async(req, res)=>{
     }
 })
 
-router.get('/attend', async(req, res)=>{
+router.get('/attend', authManger, async(req, res)=>{
     try{
         const attend = await Attend.find({})
         res.status(200).send(attend)

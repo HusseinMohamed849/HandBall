@@ -16,7 +16,7 @@ router.post('/team' , authManger, async(req, res)=>{
 })
 
 //read all team
-router.get('/team', async(req, res)=>{
+router.get('/team', authManger, async(req, res)=>{
     try{
         const team = await Team.find({})
         res.status(200).send(team)
@@ -56,22 +56,14 @@ router.delete('/team/delete', authManger, async(req, res)=>{
     }
 })
 
-//Update team
-// router.patch('/team', auth , async(req, res)=>{
-//         const update = Object.keys(req.body)
-//         const allowupdate =['name', 'rate']
-//         const isValidOperation = update.every((update)=>allowupdate.includes(update))
-    
-//         if(!isValidOperation)
-//             return res.status(400).send({error:'Invalid update'})
-       
-//             try{
-//             update.forEach((update) => req.team[update] = req.body[update])
-//             await req.team.save()
-//             res.send(req.team) 
-//     } catch (e) {
-//         res.status(500).send(e)
-//     }
-// })
+//update team from manager
+router.patch('/team', authManger, async(req, res)=>{
+    try{
+        const team = await Team.findByIdAndUpdate({_id:req.body.id},{...req.body})
+        res.status(200).send(team)
+    } catch(e) {
+        res.status(500).send(e)
+    }
+})
 
 module.exports = router
