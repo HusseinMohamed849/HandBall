@@ -79,6 +79,11 @@ const playerSchema = new mongoose.Schema({
     },address:{
         type:String,
         required:true,
+    }, Tshirt_Number:{
+        type:Number,
+        maxlength:2
+    }, possion:{
+        type:String
     }, skill_Performance :{
         type:Number,
     }, physical_Performance:{

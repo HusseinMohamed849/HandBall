@@ -14,6 +14,8 @@ const Trainer = require('./models/trainer');
 const trainerrouter = require('./routers/trainer')
 const Manager = require('./models/manger');
 const managerrouter = require('./routers/manger')
+const Expenses = require('./models/expenses');
+const expensesrouter = require('./routers/expenses')
 const Supscrip = require('./models/subscription');
 const subscriprouter = require('./routers/subscription')
 const bodyParser = require("body-parser");
@@ -34,6 +36,7 @@ app.use(subscriprouter)
 app.use(postrouter)
 app.use(questionrouter)
 app.use(managerrouter)
+app.use(expensesrouter)
 app.use(bodyParser.json());
 
 console.log('🔥 Port is connected in 3000 port! 🔥🚀')

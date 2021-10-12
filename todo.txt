@@ -1,10 +1,11 @@
 postman auth (token) --> test
-filter
+morag3a 3la l auth bta3 kol folder
 
+filter
 add potho in posts
 add question from player and replay from trainer
-to type of player (team, accadimatic)
-to tabel (playerteam, playeraccadimatic)
+agmaly l masarif 
+safy l rb7
 
 l file
 
