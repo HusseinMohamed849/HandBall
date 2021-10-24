@@ -18,6 +18,8 @@ const Expenses = require('./models/expenses');
 const expensesrouter = require('./routers/expenses')
 const Supscrip = require('./models/subscription');
 const subscriprouter = require('./routers/subscription')
+const File = require('./models/file');
+const filerouter = require('./routers/file')
 const bodyParser = require("body-parser");
 const auth = require('./middleware/auth')
 const authManger = require('./middleware/authManger')
@@ -31,6 +33,7 @@ app.use(express.json())
 app.use(playerrouter)
 app.use(teamrouter)
 app.use(trainerrouter)
+app.use(filerouter)
 app.use(attendrouter)
 app.use(subscriprouter)
 app.use(postrouter)
