@@ -14,7 +14,7 @@ router.post('/player', authManger,  async(req,res)=>{
         const token = await player.generateAuthtoken()
         // const team =  new Team({name:req.body.name})
         // await team.save()
-        res.status(201).send({player, token})
+        res.status(200).send({player, token})
     } catch (e) {
         console.log("error")
         res.status(500).send(e)
@@ -22,7 +22,7 @@ router.post('/player', authManger,  async(req,res)=>{
 })
 
 //read all players
-router.get('/player',authManger, async(req, res)=>{
+router.get('/player', authManger, async(req, res)=>{
     try{
         const player = await Player.find({})
         res.status(200).send(player)
@@ -32,22 +32,19 @@ router.get('/player',authManger, async(req, res)=>{
 })
 
 // filter
-// router.get('/player/filter', async (req, res) => {
-//     const match = {}
-//     if (req.query.gender) {
-//         match.gender = req.query.gender === "female"
+// router.get('/player/filter', async(req, res) => {
+//     // const match = {}
+//     // if (req.query.attend) 
+//     //     match.attend = req.query.attend === "true"
 //     try {
-//         await req.player.populate({
-//             match
-//         }).execPopulate()
+//         await req.player.populate('player').execPopulate()
 //         res.send(req.player)
-//         console.log("hee")
+//         console.log(req.player)
 //     } catch (e) {
 //         res.status(500).send(e)
-//         console.log('error')
+//         console.log(player)
 //     }
-// }
-// })
+// })   
 
 //Search for player
 router.post('/player/one',authManger, async(req, res)=>{

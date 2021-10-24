@@ -9,11 +9,12 @@ const subscriptionSchema = new mongoose.Schema({
         required: true
     }, player_id:{
         type:String,
+        unique: true,
         required: true,
         ref:"Player"
-    }, payed:{
-        type:Boolean,
-        default:0
+    }, value:{
+        type:Number,
+        required: true
     }
 })
 

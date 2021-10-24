@@ -1,15 +1,26 @@
 const express = require('express')
 const router = express.Router()
 const Manger = require('../models/manger')
+const Question = require('../models/question')
+const authManger = require('../middleware/authManger')
 
 router.post('/manger', async(req, res)=>{
     const manger = new Manger(req.body)
     try{
         await manger.save()
         const token = await manger.generateAuthtoken()
-        res.status(201).send({manger, token})
+        res.status(200).send({manger, token})
     } catch(e) {
         res.status(500).send(e)
+    }
+})
+
+router.patch('/answer',authManger, async(req, res)=>{
+    try{
+        const answer = await Question.findOneAndUpdate({_id:req.body.id},{answer: req.body.answer})
+        res.status(200).send(answer)
+    } catch(e) {
+        res.status(400).send(e)
     }
 })
 

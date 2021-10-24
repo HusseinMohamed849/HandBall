@@ -122,6 +122,13 @@ playerSchema.virtual('posts',{
     foreignField:'owner'
 })
 
+playerSchema.virtual('subscription',{
+    ref:'Subscription',
+    localField:'_id',
+    foreignField:'player_id'
+})
+
+
 //to create auth token
 playerSchema.methods.generateAuthtoken = async function () {
     const player = this

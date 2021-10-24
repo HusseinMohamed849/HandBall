@@ -1,9 +1,7 @@
-postman auth (token) --> test
-morag3a 3la l auth bta3 kol folder
+postman auth (token) --> test 
 
 filter
-add potho in posts
-add question from player and replay from trainer
+add photo in posts
 agmaly l masarif 
 safy l rb7
 
