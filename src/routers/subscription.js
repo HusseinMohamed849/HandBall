@@ -39,9 +39,9 @@ router.delete('/subscription',authManger, async(req, res)=>{
 
 router.get('/total', async(req, res)=>{
     try{
-        const subscription = await Subscrip.findOne({_id:req.body.id})
+        const subscription = await Subscrip.find({})
         res.status(200).send(subscription)
-        console.log(subscription.value)
+        subscription.forEach(s => console.log(s.value))
     } catch(e) {
         res.status(500).send(e)
     }

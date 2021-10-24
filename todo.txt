@@ -2,8 +2,9 @@ postman auth (token) --> test
 
 filter
 add photo in posts
-agmaly l masarif 
-safy l rb7
+
+agmaly l masarif (total)
+safy l rb7 
 
 l file
 

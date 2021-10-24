@@ -41,5 +41,14 @@ router.patch('/expenses', authManger, async(req, res)=>{
 })
 
 //to total expenses
+router.get('/total/expenses', async(req, res)=>{
+    try{
+        const expenses = await Expenses.find({})
+        res.status(200).send(expenses)
+        expenses.forEach(t => console.log(t.value))
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
 
 module.exports = router
